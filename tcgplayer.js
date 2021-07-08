@@ -44,10 +44,10 @@ async function getListingDataFromHTML(listingHTML) {
     const sellerRatingRaw = await listingHTML.findElement(By.css(SELLER_RATING_SELECTOR)).getText();
     const sellerSalesRaw = await listingHTML.findElement(By.css(SELLER_SALES_SELECTOR)).getText();
 
-    const price = extractFloatFirstMatch(priceRaw, PRICE_REGEX);
-    const shipping = extractFloatFirstMatch(shippingRaw, SHIPPING_REGEX);
-    const sellerRating = extractFloatFirstMatch(sellerRatingRaw, SELLER_RATING_REGEX);
-    const sellerSales = extractFloatFirstMatch(sellerSalesRaw, SELLER_SALES_REGEX);
+    const price = extractFloatFromFirstMatch(priceRaw, PRICE_REGEX);
+    const shipping = extractFloatFromFirstMatch(shippingRaw, SHIPPING_REGEX);
+    const sellerRating = extractFloatFromFirstMatch(sellerRatingRaw, SELLER_RATING_REGEX);
+    const sellerSales = extractFloatFromFirstMatch(sellerSalesRaw, SELLER_SALES_REGEX);
 
     return {
         condition,
@@ -62,7 +62,7 @@ async function getListingDataFromHTML(listingHTML) {
     };
 }
 
-function extractFloatFirstMatch(target, regex) {
+function extractFloatFromFirstMatch(target, regex) {
     return Number.parseFloat(target.match(regex)[1]);
 }
 
